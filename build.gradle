@@ -1,0 +1,39 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'maven-publish'
+
+sourceCompatibility = 1.7
+group = 'com.nobu_games'
+version = '1.0-SNAPSHOT'
+jar {
+    manifest {
+        attributes 'audio-lib': 'Audio transcoding library', 'Implementation-Version': version
+    }
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+dependencies {
+    compile 'com.nobu_games:logging-and-analytics:1.0-SNAPSHOT'
+    compile 'com.nobu_games:java-commons:1.0-SNAPSHOT'
+    testCompile group: 'junit', name: 'junit', version: '4.+'
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
+}
+
+publishing {
+    repositories {
+        maven {
+            mavenLocal()
+        }
+    }
+}
